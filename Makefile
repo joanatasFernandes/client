@@ -1,5 +1,5 @@
 build:
-	#./mvnw clean package *For mac*
+	#./mvnw clean package
 	mvnw.cmd clean package,
 
 db-up:
