@@ -142,3 +142,7 @@ Além da documentação da API, o código-fonte também contém comentários det
 2. **Utilizar ferramentas de navegação de código** (como IDEs, exemplo: IntelliJ IDEA, Eclipse) para acessar os comentários inline e as anotações de documentação.
 
 Se precisar de mais informações sobre a estrutura interna do código ou sobre como contribuir, consulte o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para guias adicionais.
+
+### OBS: 
+    
+É necessário alterar o nome do Banco.
