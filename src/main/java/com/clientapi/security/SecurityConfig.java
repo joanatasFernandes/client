@@ -1,5 +1,7 @@
 package com.clientapi.security;
 
+import com.clientapi.config.ApplicationProperties;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,24 +19,27 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final EncryptService encryptService;
     private final JwtRequestFilter jwtRequestFilter;
+    private final ApplicationProperties applicationProperties;
     private final UserDetailsService userDetailsService;
 
-    @Autowired
-    public SecurityConfig(JwtRequestFilter jwtRequestFilter, UserDetailsService userDetailsService) {
-        this.jwtRequestFilter = jwtRequestFilter;
-        this.userDetailsService = userDetailsService;
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/authenticate")
+                        .requestMatchers(
+                                "/authenticate",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**"
+                        )
                         .permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest()
+                        .authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -53,7 +58,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Certifique-se de que o `PasswordEncoder` está configurado
+        return encryptService.getBCryptPasswordEncoder();
     }
 }
 

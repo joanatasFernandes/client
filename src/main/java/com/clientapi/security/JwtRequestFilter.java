@@ -6,6 +6,7 @@ import java.io.IOException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,14 +16,11 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 
 @Component
-
+@RequiredArgsConstructor
 public class JwtRequestFilter implements Filter {
 
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
-    private UserDetailsService userDetailsService;
+    private final JwtUtil jwtUtil;
+    private final UserDetailsService userDetailsService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -36,9 +34,9 @@ public class JwtRequestFilter implements Filter {
         String jwt = null;
 
         // Verifica se o cabeçalho Authorization está presente e se começa com "Bearer "
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            jwt = authorizationHeader.substring(7); // Extrai o token JWT
-            username = jwtUtil.extractUsername(jwt); // Extrai o nome de usuário do token
+        if (authorizationHeader != null) {
+            jwt = authorizationHeader.replace("Bearer ", "");
+            username = jwtUtil.extractUsername(jwt);
         }
 
         // Se o contexto de segurança não estiver definido, verifica o token e define a autenticação
