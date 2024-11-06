@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "be387679-c5c3-49b1-84e9-3bef42029840",
+		"name": "Clients API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28142225",
+		"_collection_link": "https://neurogroup.postman.co/workspace/Health-Care~b52d172b-da31-4f70-8010-43a9c75b8fcf/collection/28142225-be387679-c5c3-49b1-84e9-3bef42029840?action=share&source=collection_link&creator=28142225"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data  = JSON.parse(responseBody)",
+							"postman.setEnvironmentVariable(\"AUTHORIZATION\", data.jwt)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/client/v1/authenticate",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"v1",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get clients",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTHORIZATION}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/client/v1/clients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"v1",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create client",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{AUTHORIZATION}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Client Name\",\n    \"email\": \"client@gmail.com\",\n    \"address\": {\n        \"street\": \"Rua qualquer\",\n        \"city\": \"Cidade qualquer\",\n        \"state\": \"Estado qualquer\"\n    },\n    \"createdBy\": \"string\",\n    \"modifiedBy\": \"string\",\n    \"creationDate\": \"2024-11-06T03:44:46.960Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/client/v1/clients",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"client",
+						"v1",
+						"clients"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  client-db:
+    build:
+      dockerfile: Dockerfile
+      context: ./db
+    container_name: client-db
+    image: client-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
