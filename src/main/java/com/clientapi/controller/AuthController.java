@@ -1,34 +1,41 @@
 package com.clientapi.controller;
 
+import client.api.AuthenticateApi;
+import client.model.AuthRequestDto;
+import client.model.AuthenticateResponseDto;
 import com.clientapi.security.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-public class AuthController {
+@RestController
+@RequiredArgsConstructor
+public class AuthController implements AuthenticateApi {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @PostMapping("/authenticate")
-    public String generateToken(@RequestBody AuthRequest authRequest) throws Exception {
+    @Override
+    public ResponseEntity<AuthenticateResponseDto> authenticate(AuthRequestDto authRequestDto) {
         try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                    authRequestDto.getUsername(),
+                    authRequestDto.getPassword()
             );
+
+            Authentication authenticate = authenticationManager.authenticate(authentication);
+            if (!authenticate.isAuthenticated()) {
+                return ResponseEntity.badRequest().build();
+            }
         } catch (AuthenticationException e) {
-            throw new Exception("Usuário ou senha inválidos");
+            throw new RuntimeException("Usuário ou senha inválidos");
         }
-        return jwtUtil.generateToken((UserDetails) authRequest);
+        String jwt = jwtUtil.generateToken(authRequestDto.getUsername());
+        return ResponseEntity.ok(new AuthenticateResponseDto().jwt(jwt));
     }
 }
 
