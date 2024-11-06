@@ -137,7 +137,7 @@ A documentação do projeto está disponível por meio da integração com **Swa
 ### Documentação do Código
 
 Além da documentação da API, o código-fonte também contém comentários detalhados sobre a implementação e o uso das classes e métodos principais. Para visualizá-los, você pode:
-
+acessar o link : http://localhost:8080/api/client/v1/swagger-ui/index.html#/
 1. **Explorar os arquivos diretamente no repositório**, ou
 2. **Utilizar ferramentas de navegação de código** (como IDEs, exemplo: IntelliJ IDEA, Eclipse) para acessar os comentários inline e as anotações de documentação.
 
