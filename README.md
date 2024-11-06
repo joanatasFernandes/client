@@ -108,3 +108,35 @@ Se você está atualizando seu ambiente de desenvolvimento, certifique-se de seg
 ajustar qualquer código que dependa de funções ou métodos anteriormente utilizados sem geradores.
 
 Este ajuste está em conformidade com a necessidade de melhorar o desempenho e a manutenção do código em longo prazo.
+
+## **Teste**
+
+No pasta **collection** contem as coleçoes de teste para o Postam.
+Extraia o arquivo e faça o import para o sua workspace. 
+OBS: Já contém as rotas dos endipoints.
+
+## Acessando a Documentação
+
+A documentação do projeto está disponível por meio da integração com **Swagger**. Ela oferece uma visão geral interativa da API, permitindo visualizar os endpoints disponíveis, os parâmetros necessários e as respostas esperadas.
+
+### Como acessar a documentação
+
+1. **Após iniciar o projeto**, acesse a URL da documentação em seu navegador:
+   - Se estiver rodando localmente, a URL geralmente será:
+
+     ```
+     http://localhost:8080/swagger-ui.html
+     ```
+
+2. **Autenticação e Acessos**: Se a aplicação exigir autenticação, você precisará fornecer um token ou realizar login conforme configurado no sistema.
+
+3. **Visualizando a API**: Na interface do Swagger, você pode explorar os endpoints da API, fazer chamadas diretamente e verificar a estrutura de resposta de cada um dos recursos da aplicação.
+
+### Documentação do Código
+
+Além da documentação da API, o código-fonte também contém comentários detalhados sobre a implementação e o uso das classes e métodos principais. Para visualizá-los, você pode:
+
+1. **Explorar os arquivos diretamente no repositório**, ou
+2. **Utilizar ferramentas de navegação de código** (como IDEs, exemplo: IntelliJ IDEA, Eclipse) para acessar os comentários inline e as anotações de documentação.
+
+Se precisar de mais informações sobre a estrutura interna do código ou sobre como contribuir, consulte o arquivo [CONTRIBUTING.md](CONTRIBUTING.md) para guias adicionais.
