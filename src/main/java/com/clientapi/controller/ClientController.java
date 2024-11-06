@@ -32,7 +32,7 @@ public class ClientController implements ClientsApi {
 
     @Override
     public ResponseEntity<List<Client>> getClientsByState(String state) {
-        List<ClientEntity> clientsByState = clientService.getClientsByEstado(state);
+        List<ClientEntity> clientsByState = clientService.getClientsByState(state);
         List<Client> clientsDto = clientMapper.toDto(clientsByState);
         return new ResponseEntity<>(clientsDto, HttpStatus.OK);
     }

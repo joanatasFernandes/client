@@ -92,3 +92,19 @@ Se o erro persistir, remova o arquivo de bloqueio manualmente:
 
 Navegue até C:\ProgramData\chocolatey\lib e remova o arquivo de bloqueio mencionado (995c915eb7cf3c8b25f2235e513ef8ca0c75c3e7) ou o diretório lib-bad.
 Reinicie o processo de instalação do make.
+
+
+## Mudança para Uso de Geradores
+
+Recentemente, o projeto foi reestruturado para utilizar **geradores** em vez da abordagem anterior. Isso melhora a 
+eficiência no processamento de grandes volumes de dados, simplificando o fluxo de execução e garantindo maior controle 
+sobre a memória durante o ciclo de vida do programa.
+
+A utilização de geradores permite um processamento mais eficiente e escalável, especialmente em cenários de grandes 
+conjuntos de dados ou operações de I/O, garantindo que os recursos sejam utilizados de forma otimizada, sem 
+sobrecarregar a memória.
+
+Se você está atualizando seu ambiente de desenvolvimento, certifique-se de seguir as novas práticas e 
+ajustar qualquer código que dependa de funções ou métodos anteriormente utilizados sem geradores.
+
+Este ajuste está em conformidade com a necessidade de melhorar o desempenho e a manutenção do código em longo prazo.

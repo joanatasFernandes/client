@@ -26,7 +26,7 @@ public class ClientService {
         return clientRepository.findAllOrderedByName();
     }
 
-    public List<ClientEntity> getClientsByEstado(String estado) {
+    public List<ClientEntity> getClientsByState(String estado) {
         return clientRepository.findAllByState(estado);
     }
 }
