@@ -1,5 +1,4 @@
 build:
-	#./mvnw clean package
 	mvnw.cmd clean package,
 
 db-up:
