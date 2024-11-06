@@ -1,5 +1,5 @@
 build:
-	mvnw.cmd clean package,
+	mvnw.cmd clean package
 
 db-up:
 	docker rm -f client-db || true
