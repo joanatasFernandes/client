@@ -63,7 +63,9 @@ Com o Chocolatey instalado, execute o seguinte comando no terminal com permissõ
   choco install make
    ```
 Adicione o caminho de instalação (C:\ProgramData\chocolatey\lib\make\tools\install\bin) às Variáveis de Ambiente.
-
+O caminho deve ser de acordo com seu sistema. Ex: 
+variavel PATH
+valor C:\ProgramData\chocolatey\lib\make\tools\install\bin
 Verifique se o make está funcionando corretamente:
 
    ```bash
