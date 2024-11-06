@@ -1,22 +1,32 @@
 package com.clientapi.service;
 
-import com.clientapi.model.User;
+import com.clientapi.model.UserEntity;
 import com.clientapi.repository.UserRepository;
+import com.clientapi.security.EncryptService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final EncryptService encryptService;
+    private final UserRepository userRepository;
 
     @Transactional
-    public void createUser(String username, String password) {
-        User user = new User();
+    public void createUser(String username, String password, String... roles) {
+        UserEntity user = new UserEntity();
+        EncryptService.EncryptData encrypt = encryptService.encrypt(password);
         user.setUsername(username);
-        user.setPassword("{noop}" + password); // O {noop} desativa a codificação para fins de teste
+        user.setRoles(String.join(",", roles));
+        user.setPassword(encrypt.password());
+        user.setToken(encrypt.token());
+
         userRepository.save(user);
+    }
+
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }
