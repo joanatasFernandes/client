@@ -4,7 +4,7 @@ COPY init.sql /docker-entrypoint-initdb.d/
 
 ENV LANG en_US.UTF-8
 
-ENV POSTGRES_DB movies_db
+ENV POSTGRES_DB client_db
 
 MAINTAINER Joanatas
 
